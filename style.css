@@ -18,3 +18,7 @@ table {
   cursor: pointer;
   background-color: rgba(13, 70, 228, 0.1);
 }
+
+.active {
+  background-color: red;
+}

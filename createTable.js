@@ -1,5 +1,5 @@
 function generateRandomNumber() {
-  return Math.floor(Math.random() * 10) + 1;
+  return Math.floor(Math.random() * 100) + 1;
 }
 
 function createDomElement(tagName, text) {
@@ -32,11 +32,13 @@ function createDefaultTable(rowsNumber, cellsNumber) {
     }
   }
 
+  paintCells(table);
+
   return table;
 }
 
 const buttonAddRow = createDomElement('button', 'Add Row 😍');
-const buttonAddCell = createDomElement('button', 'Add Cell 😎');
+const buttonAddCell = createDomElement('button', 'Add Column 😎');
 const defaultTable = createDefaultTable(4, 4);
 
 document.body.append(buttonAddRow);
@@ -50,6 +52,8 @@ defaultTable.addEventListener('click', e => {
   for (let i = 0; i < defaultTable.rows.length; i++) {
     defaultTable.rows[i].cells[cellIndexToDelete].remove();
   }
+
+  paintCells(defaultTable);
 });
 
 // DELETE ROW
@@ -57,6 +61,8 @@ defaultTable.addEventListener('click', e => {
   if (!e.target.classList.contains('deleteRow')) return;
   const tr = e.target.parentElement;
   tr.remove();
+
+  paintCells(defaultTable);
 });
 
 // ADD ROW
@@ -75,11 +81,11 @@ buttonAddRow.addEventListener('click', e => {
   }
 
   defaultTable.append(tr);
+  paintCells(defaultTable);
 });
 
 // ADD COLUMN
 buttonAddCell.addEventListener('click', e => {
-  // const cellsNumber = defaultTable.rows.length;
   Array.from(defaultTable.rows).forEach((tr, i) => {
     let cell;
     if (i === 0) {
@@ -91,4 +97,26 @@ buttonAddCell.addEventListener('click', e => {
 
     tr.append(cell);
   });
+
+  paintCells(defaultTable);
 });
+
+// PAINT CELLS
+function paintDiagonalCells(table) {
+  const rowsNumber = table.rows.length;
+  const columnsNumber = table.rows[0].cells.length;
+
+  if (rowsNumber === columnsNumber) {
+    for (let i = 1; i < rowsNumber; i++) {
+      table.rows[i].cells[i].className = 'active';
+    }
+  } else {
+    Array.from(document.querySelectorAll('.active')).forEach(cell =>
+      cell.classList.remove('active')
+    );
+  }
+}
+
+function paintCells(table) {
+  paintDiagonalCells(table);
+}
