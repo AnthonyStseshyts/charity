@@ -1,0 +1,20 @@
+td {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 15px;
+}
+
+.deleteColumn:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.deleteRow:hover {
+  cursor: pointer;
+  background-color: rgba(13, 70, 228, 0.1);
+}
