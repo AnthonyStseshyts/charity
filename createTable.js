@@ -1,5 +1,5 @@
 function generateRandomNumber() {
-  return Math.floor(Math.random() * 100) + 1;
+  return Math.floor(Math.random() * 10) + 1;
 }
 
 function createDomElement(tagName, text) {
@@ -117,6 +117,44 @@ function paintDiagonalCells(table) {
   }
 }
 
+function paintMaxMin(table) {
+  let min = +table.rows[1].cells[1].textContent;
+  let minCells = [table.rows[1].cells[1]];
+  let max = +table.rows[1].cells[1].textContent;
+  let maxCells = [table.rows[1].cells[1]];
+  // TODO: length -1
+  for (let i = 1; i < table.rows.length; i++) {
+    for (let j = 1; j < table.rows[i].cells.length; j++) {
+      const curCell = table.rows[i].cells[j];
+
+      if (+curCell.textContent < min) {
+        min = +curCell.textContent;
+        minCells = [curCell];
+      } else if (+curCell.textContent === min) {
+        minCells.push(curCell);
+      } else if (+curCell.textContent > max) {
+        max = +curCell.textContent;
+        maxCells = [curCell];
+      } else if (+curCell.textContent === max) {
+        maxCells.push(curCell);
+      }
+    }
+  }
+
+  minCells.forEach(cell => {
+    if (!cell.classList.contains('active')) {
+      cell.className = 'min';
+    }
+  });
+
+  maxCells.forEach(cell => {
+    if (!cell.classList.contains('active')) {
+      cell.className = 'max';
+    }
+  });
+}
+
 function paintCells(table) {
+  paintMaxMin(table);
   paintDiagonalCells(table);
 }

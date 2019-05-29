@@ -22,3 +22,11 @@ table {
 .active {
   background-color: red;
 }
+
+.min {
+  background-color: aqua;
+}
+
+.max {
+  background-color: rgb(255, 179, 179);
+}
