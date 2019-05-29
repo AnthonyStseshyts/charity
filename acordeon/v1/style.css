@@ -1,0 +1,23 @@
+.part {
+  overflow: hidden;
+}
+
+h2 {
+  margin: 0;
+}
+
+.text {
+  height: 0;
+}
+
+.acordeon.active .text {
+  height: 100%;
+}
+
+.tab {
+  background-color: yellow;
+}
+
+.text {
+  background-color: cyan;
+}
